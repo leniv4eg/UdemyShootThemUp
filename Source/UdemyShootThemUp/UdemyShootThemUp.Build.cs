@@ -18,7 +18,8 @@ public class UdemyShootThemUp : ModuleRules
 			"UdemyShootThemUp/Public/Components", 
 			"UdemyShootThemUp/Public/Dev", 
 			"UdemyShootThemUp/Public/Weapon",
-            "UdemyShootThemUp/Public/UI"
+            "UdemyShootThemUp/Public/UI",
+			"UdemyShootThemUp/Public/Animations"
         });
 
 		// Uncomment if you are using Slate UI

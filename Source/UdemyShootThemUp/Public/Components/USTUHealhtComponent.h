@@ -4,10 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "USTUCoreTypes.h"
 #include "USTUHealhtComponent.generated.h"
-
-DECLARE_MULTICAST_DELEGATE(FOnDeathSignature);
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnHealtChangedSignature, float);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class UDEMYSHOOTTHEMUP_API UUSTUHealhtComponent : public UActorComponent

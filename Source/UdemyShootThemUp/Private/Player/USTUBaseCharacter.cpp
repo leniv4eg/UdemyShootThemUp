@@ -77,6 +77,7 @@ void AUSTUBaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	PlayerInputComponent->BindAction("Fire", IE_Pressed, WeaponComponent, &UUSTUWeaponComponent::StartFire);
 	PlayerInputComponent->BindAction("Fire", IE_Released, WeaponComponent, &UUSTUWeaponComponent::StopFire);
 	PlayerInputComponent->BindAction("NextWeapon", IE_Pressed, WeaponComponent, &UUSTUWeaponComponent::NextWeapon);
+	PlayerInputComponent->BindAction("Reload", IE_Pressed, WeaponComponent, &UUSTUWeaponComponent::Reload);
 }
 
 void AUSTUBaseCharacter::MoveForvard(float Amount)
@@ -106,6 +107,7 @@ void AUSTUBaseCharacter::OnDeath()
 {
 	UE_LOG(BaseCharacterLog, Error, TEXT("Player %s is dead"), *GetName());
 	PlayAnimMontage(DeathAnimMontage);
+	WeaponComponent->StopFire();
 
 	GetCharacterMovement()->DisableMovement();
 
@@ -114,7 +116,6 @@ void AUSTUBaseCharacter::OnDeath()
 	if (Controller)
 		Controller->ChangeState(NAME_Spectating);
 	GetCapsuleComponent()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
-	WeaponComponent->StopFire();
 }
 
 void AUSTUBaseCharacter::OnHealtChanged(float Health)
