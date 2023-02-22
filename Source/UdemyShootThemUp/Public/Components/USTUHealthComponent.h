@@ -5,21 +5,24 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "USTUCoreTypes.h"
-#include "USTUHealhtComponent.generated.h"
+#include "USTUHealthComponent.generated.h"
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class UDEMYSHOOTTHEMUP_API UUSTUHealhtComponent : public UActorComponent
+class UDEMYSHOOTTHEMUP_API UUSTUHealthComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
-	UUSTUHealhtComponent();
+	UUSTUHealthComponent();
 
 	FOnDeathSignature OnDeath;
-	FOnHealtChangedSignature OnHealtChanged;
+	FOnHealthChangedSignature OnHealtChanged;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Health")
 		bool IsDead() const { return FMath::IsNearlyZero(Health); }
+
+	UFUNCTION(BlueprintCallable, Category = "Health")
+		float GetHealthPercent() const { return Health / MaxHealth; }
 
 	float GetHealth() const { return Health; }
 

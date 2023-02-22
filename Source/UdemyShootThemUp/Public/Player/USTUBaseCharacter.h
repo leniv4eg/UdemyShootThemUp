@@ -9,7 +9,7 @@
 
 class UCameraComponent;
 class USpringArmComponent;
-class UUSTUHealhtComponent;
+class UUSTUHealthComponent;
 class UTextRenderComponent;
 class UUSTUWeaponComponent;
 
@@ -30,10 +30,10 @@ protected:
 		UCameraComponent* CameraComponent;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
-		UUSTUHealhtComponent* HealthComponent;
+		UUSTUHealthComponent* HealthComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
-		UTextRenderComponent* HealhtTextComponent;
+		UTextRenderComponent* HealthTextComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 		UUSTUWeaponComponent* WeaponComponent;

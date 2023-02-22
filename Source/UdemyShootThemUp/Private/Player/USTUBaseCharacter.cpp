@@ -6,7 +6,7 @@
 #include "Components/InputComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Components/USTUCharacterMovementComponent.h"
-#include "Components/USTUHealhtComponent.h"
+#include "Components/USTUHealthComponent.h"
 #include "Components/TextRenderComponent.h"
 #include "Components/USTUWeaponComponent.h"
 #include <Components/CapsuleComponent.h>
@@ -28,11 +28,11 @@ AUSTUBaseCharacter::AUSTUBaseCharacter(const FObjectInitializer& ObjInit) :Super
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>("CameraComponent");
 	CameraComponent->SetupAttachment(SpringArmComponent);
 
-	HealthComponent = CreateDefaultSubobject<UUSTUHealhtComponent>("HealhtComponent");
+	HealthComponent = CreateDefaultSubobject<UUSTUHealthComponent>("HealthComponent");
 
-	HealhtTextComponent = CreateDefaultSubobject<UTextRenderComponent>("HealhtTextComponent");
-	HealhtTextComponent->SetupAttachment(GetRootComponent());
-	HealhtTextComponent->SetOwnerNoSee(true);
+	HealthTextComponent = CreateDefaultSubobject<UTextRenderComponent>("HealthTextComponent");
+	HealthTextComponent->SetupAttachment(GetRootComponent());
+	HealthTextComponent->SetOwnerNoSee(true);
 
 	WeaponComponent = CreateDefaultSubobject<UUSTUWeaponComponent>("WeaponComponent");
 }
@@ -43,7 +43,7 @@ void AUSTUBaseCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	check(HealthComponent);
-	check(HealhtTextComponent);
+	check(HealthTextComponent);
 	check(GetCharacterMovement());
 
 	OnHealtChanged(HealthComponent->GetHealth());
@@ -120,7 +120,7 @@ void AUSTUBaseCharacter::OnDeath()
 
 void AUSTUBaseCharacter::OnHealtChanged(float Health)
 {
-	HealhtTextComponent->SetText(FText::FromString(FString::Printf(TEXT("%.0f"), Health)));
+	HealthTextComponent->SetText(FText::FromString(FString::Printf(TEXT("%.0f"), Health)));
 }
 
 void AUSTUBaseCharacter::OnGroundLanded(const FHitResult& Hit)
