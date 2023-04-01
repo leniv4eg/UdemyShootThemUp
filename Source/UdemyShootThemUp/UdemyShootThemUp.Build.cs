@@ -8,7 +8,15 @@ public class UdemyShootThemUp : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(new string[] 
+		{ 
+			"Core", 
+			"CoreUObject", 
+			"Engine", 
+			"InputCore", 
+			"Niagara",
+			"PhysicsCore"
+		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
@@ -20,7 +28,8 @@ public class UdemyShootThemUp : ModuleRules
 			"UdemyShootThemUp/Public/Weapon",
             "UdemyShootThemUp/Public/UI",
 			"UdemyShootThemUp/Public/Animations",
-            "UdemyShootThemUp/Public/Pickups"
+            "UdemyShootThemUp/Public/Pickups",
+            "UdemyShootThemUp/Public/Weapon/Components"
         });
 
 		// Uncomment if you are using Slate UI

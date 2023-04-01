@@ -45,8 +45,9 @@ void AUSTUBaseCharacter::BeginPlay()
 	check(HealthComponent);
 	check(HealthTextComponent);
 	check(GetCharacterMovement());
+	check(GetMesh());
 
-	OnHealtChanged(HealthComponent->GetHealth());
+	OnHealtChanged(HealthComponent->GetHealth(), 0.0f);
 	HealthComponent->OnDeath.AddUObject(this, &AUSTUBaseCharacter::OnDeath);
 	HealthComponent->OnHealtChanged.AddUObject(this, &AUSTUBaseCharacter::OnHealtChanged);
 	
@@ -106,8 +107,7 @@ void AUSTUBaseCharacter::OnStopRuning()
 void AUSTUBaseCharacter::OnDeath()
 {
 	UE_LOG(BaseCharacterLog, Error, TEXT("Player %s is dead"), *GetName());
-	PlayAnimMontage(DeathAnimMontage);
-	WeaponComponent->StopFire();
+	//PlayAnimMontage(DeathAnimMontage);
 
 	GetCharacterMovement()->DisableMovement();
 
@@ -116,9 +116,13 @@ void AUSTUBaseCharacter::OnDeath()
 	if (Controller)
 		Controller->ChangeState(NAME_Spectating);
 	GetCapsuleComponent()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	WeaponComponent->StopFire();
+
+	GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	GetMesh()->SetSimulatePhysics(true);
 }
 
-void AUSTUBaseCharacter::OnHealtChanged(float Health)
+void AUSTUBaseCharacter::OnHealtChanged(float Health, float HealthDelta)
 {
 	HealthTextComponent->SetText(FText::FromString(FString::Printf(TEXT("%.0f"), Health)));
 }

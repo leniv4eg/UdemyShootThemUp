@@ -6,15 +6,15 @@
 #include "Weapon/USTUBaseWeapon.h"
 #include "USTURifleWeapon.generated.h"
 
-/**
- * 
- */
+class UUSTUWeaponFXComponent;
+
 UCLASS()
 class UDEMYSHOOTTHEMUP_API AUSTURifleWeapon : public AUSTUBaseWeapon
 {
 	GENERATED_BODY()
 	
 public:
+	AUSTURifleWeapon();
 	virtual void StartFire();
 	virtual void StopFire();
 
@@ -28,8 +28,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon", meta = (ClampMin = "1.0", ClampMax = "200.0"))
 		float DamageAmount = 10.0f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VFX")
+		UUSTUWeaponFXComponent* WeaponFXComponent;
+
+	virtual void BeginPlay() override;
 	virtual void MakeShot();
-	virtual bool GetTraceData(FVector& TraceStart, FVector& TraceEnd) const;
+	virtual bool GetTraceData(FVector& TraceStart, FVector& TraceEnd) const override;
 
 private:
 	FTimerHandle ShotTimerHandle;

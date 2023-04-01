@@ -8,6 +8,7 @@
 
 class USphereComponent;
 class UProjectileMovementComponent;
+class UUSTUWeaponFXComponent;
 
 UCLASS()
 class UDEMYSHOOTTHEMUP_API AUSTUProjectile : public AActor
@@ -37,6 +38,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon", meta = (ClampMin = "0.0", ClampMax = "10.0"))
 		float LifeSeconds = 5.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VFX")
+		UUSTUWeaponFXComponent* WeaponFXComponent;
 
 	virtual void BeginPlay() override;
 

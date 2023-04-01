@@ -3,6 +3,18 @@
 #include "Weapon/USTURifleWeapon.h"
 #include <Engine/World.h>
 #include <DrawDebugHelpers.h>
+#include "Weapon/Components/USTUWeaponFXComponent.h"
+
+AUSTURifleWeapon::AUSTURifleWeapon()
+{
+	WeaponFXComponent = CreateDefaultSubobject<UUSTUWeaponFXComponent>("WeaponFXComponent");
+}
+
+void AUSTURifleWeapon::BeginPlay()
+{
+	Super::BeginPlay();
+	check(WeaponFXComponent);
+}
 
 void AUSTURifleWeapon::StartFire()
 {
@@ -43,13 +55,14 @@ void AUSTURifleWeapon::MakeShot()
 
 		//DrawDebugLine(GetWorld(), MuzzleLocation, Out, FColor::Red, false, 3.0f, 0, 3.0f);*/
 		MakeDamage(HitResult);
-		DrawDebugLine(GetWorld(), GetMuzzleWorldLocation(), HitResult.ImpactPoint, FColor::Red, false, 3.0f, 0, 3.0f);
-		DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 10.0f, 24, FColor::Red, false, 5.0f);
+		//DrawDebugLine(GetWorld(), GetMuzzleWorldLocation(), HitResult.ImpactPoint, FColor::Red, false, 3.0f, 0, 3.0f);
+		//DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 10.0f, 24, FColor::Red, false, 5.0f);
+		WeaponFXComponent->PlayImpactFX(HitResult);
 	}
-	else
-	{
-		DrawDebugLine(GetWorld(), GetMuzzleWorldLocation(), TraceEnd, FColor::Red, false, 3.0f, 0, 3.0f);
-	}
+	//else
+	//{
+	//	DrawDebugLine(GetWorld(), GetMuzzleWorldLocation(), TraceEnd, FColor::Red, false, 3.0f, 0, 3.0f);
+	//}
 	DecreaseAmmo();
 }
 
