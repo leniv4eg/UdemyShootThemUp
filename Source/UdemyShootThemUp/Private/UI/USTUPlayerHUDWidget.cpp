@@ -6,10 +6,10 @@
 #include "Components/USTUWeaponComponent.h"
 #include "USTUUtils.h"
 
-/*bool UUSTUPlayerHUDWidget::Initialize()
+bool UUSTUPlayerHUDWidget::Initialize()
 {
 	const auto HealthComponent = USTUUtils::GetPlayerComponent<UUSTUHealthComponent>(GetOwningPlayerPawn());
-	if (!HealthComponent)
+	if (HealthComponent)
 		HealthComponent->OnHealtChanged.AddUObject(this, &UUSTUPlayerHUDWidget::OnHealthChanged);
 
 	return Super::Initialize();
@@ -18,8 +18,8 @@
 void UUSTUPlayerHUDWidget::OnHealthChanged(float Health, float HealthDelta)
 {
 	if (HealthDelta < 0.0f)
-		OnTakeDamage();
-}*/
+		OnTakeDamage_BP();
+}
 
 float UUSTUPlayerHUDWidget::GetHealthPercent() const
 {

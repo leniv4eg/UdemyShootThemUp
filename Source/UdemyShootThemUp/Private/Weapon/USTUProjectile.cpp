@@ -56,7 +56,7 @@ void AUSTUProjectile::OnProjectileHit(UPrimitiveComponent* HitComponent, AActor*
 		GetController(), //
 		DoFullDamage);
 
-	DrawDebugSphere(GetWorld(), GetActorLocation(), DamageRadius, 24, FColor::Red, false, LifeSeconds);
+	//DrawDebugSphere(GetWorld(), GetActorLocation(), DamageRadius, 24, FColor::Red, false, LifeSeconds);
 	WeaponFXComponent->PlayImpactFX(Hit);
 	Destroy();
 }

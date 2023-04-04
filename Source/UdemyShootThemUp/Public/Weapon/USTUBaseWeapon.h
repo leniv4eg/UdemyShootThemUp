@@ -9,6 +9,8 @@
 
 
 class USkeletalMeshComponent;
+class UNiagaraSystem;
+class UNiagaraComponent;
 
 UCLASS()
 class UDEMYSHOOTTHEMUP_API AUSTUBaseWeapon : public AActor
@@ -49,6 +51,10 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI")
 		FWeaponUIData UIData;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "VFX")
+		UNiagaraSystem* MuzzleFX;
+
+
 	virtual void BeginPlay() override;
 	virtual bool GetTraceData(FVector& TraceStart, FVector& TraceEnd) const;
 
@@ -64,6 +70,8 @@ protected:
 	bool IsAmmoFull() const;
 
 	void LogAmmo();
+
+	UNiagaraComponent* SpawnMuzzleFX();
 
 private:
 	FAmmoData CurrentAmmo;

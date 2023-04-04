@@ -7,6 +7,8 @@
 #include "USTURifleWeapon.generated.h"
 
 class UUSTUWeaponFXComponent;
+class UNiagaraComponent;
+class UNiagaraSystem;
 
 UCLASS()
 class UDEMYSHOOTTHEMUP_API AUSTURifleWeapon : public AUSTUBaseWeapon
@@ -31,6 +33,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VFX")
 		UUSTUWeaponFXComponent* WeaponFXComponent;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VFX")
+		UNiagaraSystem* TraceFX;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VFX")
+		FString TraceTargetName = "TraceTarget";
+		
 	virtual void BeginPlay() override;
 	virtual void MakeShot();
 	virtual bool GetTraceData(FVector& TraceStart, FVector& TraceEnd) const override;
@@ -38,5 +46,11 @@ protected:
 private:
 	FTimerHandle ShotTimerHandle;
 
+	UPROPERTY()
+		UNiagaraComponent* MuzzleFXComponent;
+
 	void MakeDamage(FHitResult& HitResult);
+	void InitMuzzleFX();
+	void SetMuzzleFxVisibility(bool Visible);
+	void SpawnTraceFX(const FVector& TraceStart, const FVector& TraceEnd);
 };

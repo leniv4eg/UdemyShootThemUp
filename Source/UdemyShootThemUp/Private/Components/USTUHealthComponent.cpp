@@ -54,7 +54,7 @@ void UUSTUHealthComponent::HealUpdate()
 
 void UUSTUHealthComponent::SetHealth(float NewHealth)
 {
-	const auto NextHealth = FMath::Clamp(NewHealth, 0.0, MaxHealth);
+	const auto NextHealth = FMath::Clamp(NewHealth, 0.0f, MaxHealth);
 	const auto HealthDelta = NextHealth - Health;
 
 	Health = NextHealth;
